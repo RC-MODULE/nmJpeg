@@ -1,17 +1,10 @@
-"# nmJpeg" 
-
+# nmJPEG
 Библиотека JPEG кодирования для NeuroMatrix (nmc3,nmc4)
 - Поддреживается только ч/б формат
 
-- зависимости nmpp (hal для примеров )
 
-сборка библиотеки под nmc3 архитектуру:
-\nmJpeg\make\jpeg-nmc3 make    (GCC)
-\nmJpeg\make\jpeg-nmc3 -f legacy.mk (Legacy)
-
-сборка библиотки под nmc4 архитектуру::
-\nmJpeg\make\jpeg-nmc3 make    (GCC)
-\nmJpeg\make\jpeg-nmc3 -f legacy.mk (Legacy)
+## Зависимости
+- Библиотека nmjpeg использует  [NMPP](https://github.com/RC-MODULE/nmpp) , необходимо собрать соответствующие библиотеки. 
 
 ## Сборка NeuroMatrix библиотек  GCC  компилятором (Windows/Linux)
   Сборка библиотек осуществляется командой ```make``` из соответствующей архитектуре папки */make/nmpp-\<archictecture\>* :  
@@ -32,9 +25,9 @@
 
 
 ## Сборка x86/x64 библиотек  
- Библиотеки выполняют точную эмуляцию функций библотеки nmjpeg под x86/x64. 
+ Библиотеки выполняют точную эмуляцию функций библиотеки nmjpeg под x86/x64. 
  Генерация сборочных файлов/проектов для x86/64 архитектуры в Windows/Linux оcуществляется средствами [**premake5**](https://premake.github.io/).  
-Сконфигурировать проект и собрать библиотеку можно одной из команд:   
+Сконфигурировать проект и собрать библиотеку можно командой:   
 
 | Команда                                   | Результат сборки               |
 |-------------------------------------------|------------------------------- |
@@ -59,14 +52,22 @@
 Для сборки  примеров  может быть необходим [HAL](https://github.com/RC-MODULE/hal) со скомпилированными соответствующими библиотеками и прописанной переменной окружения *HAL* и *NMPP*.
  
  
-|Действие                       | Команда                                                           | Результат сборки               |
+|Действие                       | Команда                                                           | Результат                |
 |-------------------------------|-------------------------------------------------------------------|------------------------------- |
-|Собрать пример под 5103 legacy	|```\nmjpeg\examples\simple\make_mc5103\> make -f legacy.mk ```		| make_mc5103\>main.abs |
+|Собрать пример под МЦ51.03 legacy nmsdk|```\nmjpeg\examples\simple\make_mc5103\> make -f legacy.mk ```		| make_mc5103\>main.abs |
 |Запустить пример 				|```\nmjpeg\examples\simple\make_mc5103\> make -f legacy.mk run ```	| make_mc5103\>out.jpg       | 
-|Собрать пример под МС12101 GCC	|```\nmjpeg\examples\simple\make_mc12101\> make  ```				| make_mc12101\>main |
+|Собрать пример под МС121.01 NMC-GCC	|```\nmjpeg\examples\simple\make_mc12101\> make  ```				| make_mc12101\>main |
 |Запустить пример 				|```\nmjpeg\examples\simple\make_mc12101\> make run ```				| make_mc12101\>out.jpg       | 
-|Собрать пример под МС12101 legacy|```\nmjpeg\examples\simple\make_mc12101\> make -f legacy.mk run  ```		| make_mc12101\>main.abs |
+|Собрать пример под МС121.01 legacy nmsdk|```\nmjpeg\examples\simple\make_mc12101\> make -f legacy.mk run  ```		| make_mc12101\>main.abs |
 |Запустить пример 				|```\nmjpeg\examples\simple\make_mc12101\> make -f legacy.mk run run ```	| make_mc12101\>out.jpg       | 
 
+## Оптимизация 
+Библиотека занимает секции :
+.text_jpeg 			
+.data_jpeg			
+.data_jpeg_opt0		
+.data_jpeg_opt1		
+Необходимо их расположить во внутренней памяти. 
+Входные , выходные и временные буфера необходимо расположить в разных банках внутренней памяти. 
 
-
+Ориентировочная скорость кодирования 9-10 таков на точку. 
