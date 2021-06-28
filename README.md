@@ -52,14 +52,16 @@
 Для сборки  примеров  может быть необходим [HAL](https://github.com/RC-MODULE/hal) со скомпилированными соответствующими библиотеками и прописанной переменной окружения *HAL* и *NMPP*.
  
  
-|Действие                       | Команда                                                           | Результат                |
-|-------------------------------|-------------------------------------------------------------------|------------------------------- |
-|Собрать пример под МЦ51.03 legacy nmsdk|```\nmjpeg\examples\simple\make_mc5103\> make -f legacy.mk ```		| make_mc5103\>main.abs |
-|Запустить пример 				|```\nmjpeg\examples\simple\make_mc5103\> make -f legacy.mk run ```	| make_mc5103\>out.jpg       | 
-|Собрать пример под МС121.01 NMC-GCC	|```\nmjpeg\examples\simple\make_mc12101\> make  ```				| make_mc12101\>main |
-|Запустить пример 				|```\nmjpeg\examples\simple\make_mc12101\> make run ```				| make_mc12101\>out.jpg       | 
-|Собрать пример под МС121.01 legacy nmsdk|```\nmjpeg\examples\simple\make_mc12101\> make -f legacy.mk run  ```		| make_mc12101\>main.abs |
-|Запустить пример 				|```\nmjpeg\examples\simple\make_mc12101\> make -f legacy.mk run run ```	| make_mc12101\>out.jpg       | 
+|Действие                       	| Команда                                                           	| Результат                	|
+|-------------------------------	|-------------------------------------------------------------------	|--------------------------	|
+|Собрать пример под МЦ51.03 NMC-GCC	|```\nmjpeg\examples\simple\make_mc5103\> make  ```						| make_mc5103\>main 		|
+|Запустить пример 					|```\nmjpeg\examples\simple\make_mc5103\> make run ```					| make_mc5103\>out.jpg     	| 
+|Собрать пример под МС121.01 NMC-GCC|```\nmjpeg\examples\simple\make_mc12101\> make  ```					| make_mc12101\>main 		|
+|Запустить пример 					|```\nmjpeg\examples\simple\make_mc12101\> make run ```					| make_mc12101\>out.jpg    	| 
+|Собрать пример под МЦ51.03 legacy nmsdk|```\nmjpeg\examples\simple\make_mc5103\> make -f legacy.mk ```		| make_mc5103\>main.abs 	|
+|Запустить пример 					|```\nmjpeg\examples\simple\make_mc5103\> make -f legacy.mk run ```		| make_mc5103\>out.jpg    	| 
+|Собрать пример под МС121.01 legacy nmsdk|```\nmjpeg\examples\simple\make_mc12101\> make -f legacy.mk run ```| make_mc12101\>main.abs 	|
+|Запустить пример 					|```\nmjpeg\examples\simple\make_mc12101\> make -f legacy.mk run ```	| make_mc12101\>out.jpg   	|	 
 
 ## Оптимизация 
 Библиотека занимает секции :

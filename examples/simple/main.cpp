@@ -70,12 +70,12 @@ int main()
 	}
 
 	nmjpegInit(pnCWBuffer);		
-	t0=clock();	
+	//t0=clock();	
 	
 
 	int nBytes = nmjpegCompress((nm8u*)pSrc, (nm8u*)pDst, Width, Height,0, pTmp0,pTmp1);
 	
-	t1=clock();
+	//t1=clock();
 	// 8.9 ticks/pixel  без nmjpegFill 
 
 	#ifndef __NM__

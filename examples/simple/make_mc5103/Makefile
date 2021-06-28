@@ -13,23 +13,26 @@ ifndef MC5103
 $(warning *** WARNING: 'mc5103' environment variable is not defined! Board SDK might not have installed correctly. )
 endif 
 
+ARCH 	 = nmc3
 PROJECT  = main
-TARGET   = $(PROJECT).abs
+TARGET   = $(PROJECT)
 
 CC       = nmc-g++
 AS       = nmc-gcc 
-CXXFLAGS = -std=c++11 -O2 -Wall -mnmc3
-LIBS     = -lnmjpeg-nmc3 -lnmpp-nmc3 -lhal-$(BOARD)  -lc  -Wl,--whole-archive -l$(BOARD)lib  -Wl,--no-whole-archive
+CXXFLAGS = -std=c++11 -O2 -Wall -m$(ARCH)
+LIBS     = -lnmjpeg-$(ARCH) -lnmpp-$(ARCH)  -lhal-$(BOARD)  -lc  -Wl,--whole-archive -l$(BOARD)lib  -Wl,--no-whole-archive 
 
-#-l$(BOARD)lib
-CFG      = $(BOARD)brd.cfg
+
+#CFG     = -c$(BOARD)brd.cfg
+CFG      = -T$(BOARD)brd.lds
 MAP      = $(PROJECT).map
 
-LDFLAGS  = -Wl,-Map=$(MAP) -Wl,-c$(CFG) 
+LDFLAGS  = -Wl,-Map=$(MAP) -Wl,$(CFG) 
 
 INC_DIRS = -I"$(BSP)/include" -I"$(NMPP)/include" -I"$(HAL)/include" -I$(ROOT)/include
-#LIB_DIRS = -L"$(BSP)/lib"     -L"$(NMPP)/lib"     -L"$(HAL)/lib" 	 -L$(ROOT)/lib -L"$(NMCGCC)/lib" -L"$(NMCGCC)/nmc/lib/nmc4"
-LIB_DIRS = -L"$(BSP)/lib"     -L"$(NMPP)/lib"     -L"$(HAL)/lib" 	 -L$(ROOT)/lib -L"$(NMCGCC)/lib" -L"$(NMCGCC)/nmc/lib/nmc3"
+LIB_DIRS = -L"$(BSP)/lib" 	  -L"$(NMPP)/lib"     -L"$(HAL)/lib" 	 -L$(ROOT)/lib   -L"$(NMCGCC)/lib" -L"$(NMCGCC)/nmc/lib/$(ARCH)"
+
+
 SRC_DIRS = ..
 SRC_CPP  = $(wildcard $(addsuffix /*.cpp,$(SRC_DIRS)))
 SRC_ASM  = $(wildcard $(addsuffix /*.asm,$(SRC_DIRS)))
@@ -44,13 +47,11 @@ $(TARGET): $(SRC_ALL) Makefile
 #PATH:=$(BSP)/bin;$(PATH)
 
 run: $(TARGET)
-	mc5103run $(TARGET)
-#	--recv_file_name=out.jpg --recv_sect=.jpegout --recv_size=0x100
+	$(BOARD)run $(TARGET)  --recv_file_name=out.jpg --recv_sect=.jpegout --recv_size=0x400
 
-#$(MAKE) -f legacy.mk run
 
 qemu:	
-	$(MAKE) LIBS="-lnmpp-nmc3 -lc " -B TARGET=$(TARGET)_qemu
+	$(MAKE) LIBS="-lnmpp-$(ARCH) -lc " -B TARGET=$(TARGET)_qemu
 	nmc-qemu $(TARGET)_qemu
 	
 nmc4vars_win.mk:

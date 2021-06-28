@@ -23,18 +23,17 @@ CXXFLAGS = -std=c++11 -O2 -Wall -m$(ARCH)
 
 LIBS     = -lnmjpeg-$(ARCH) -lnmpp-$(ARCH)  -lhal-$(BOARD)     -Wl,--whole-archive -l$(BOARD)   -Wl,--no-whole-archive  -lc
 
-#-l$(BOARD)lib -lnmpp-$(ARCH)
-#CFG      = $(BOARD)-nmpu1.cfg
-CFG		 = mc12101-nmpu1.lds
+
+#CFG     = -c$(BOARD)-nmpu1.cfg
+CFG      = -T$(BOARD)-nmpu1.lds
 MAP      = $(PROJECT).map
 
-LDFLAGS  = -Wl,-Map=$(MAP) -Wl,-T$(CFG) 
-#LDFLAGS  = -Wl,-Map=$(MAP) -Wl,-c$(CFG) 
+LDFLAGS  = -Wl,-Map=$(MAP) -Wl,$(CFG) 
 
 INC_DIRS = -I"$(BSP)/include" -I"$(NMPP)/include" -I"$(HAL)/include" -I$(ROOT)/include
-LIB_DIRS = -L"$(BSP)/lib" 	  -L"$(NMPP)/lib"     -L"$(HAL)/lib" 	 -L$(ROOT)/lib   -L"$(NMCGCC)/lib" -L"$(NMCGCC)/nmc/lib/nmc4"
+LIB_DIRS = -L"$(BSP)/lib" 	  -L"$(NMPP)/lib"     -L"$(HAL)/lib" 	 -L$(ROOT)/lib   -L"$(NMCGCC)/lib" -L"$(NMCGCC)/nmc/lib/$(ARCH)"
 
-#-L"$(NMCGCC)/lib" -L"$(NMCGCC)/nmc/lib/nmc4"  
+
 SRC_DIRS = ..
 SRC_CPP  = $(wildcard $(addsuffix /*.cpp,$(SRC_DIRS)))
 SRC_ASM  = $(wildcard $(addsuffix /*.asm,$(SRC_DIRS)))
@@ -49,9 +48,8 @@ $(TARGET): $(SRC_ALL) Makefile
 #PATH:=$(BSP)/bin;$(PATH)
 
 run: $(TARGET)
-	mc12101run $(TARGET) -p --recv_file_name=out.jpg --recv_sect=.jpegout --recv_size=0x100
-#	mc12101run $(TARGET) -p --recv_file_name=out.jpg --recv_addr=0x20006172 --recv_size=0x100
-#	$(MAKE) -f legacy.mk run
+	$(BOARD)run $(TARGET) -p --recv_file_name=out.jpg --recv_sect=.jpegout --recv_size=0x400
+
 
 qemu:	
 	$(MAKE) LIBS="-lnmpp-$(ARCH) -lc " -B TARGET=$(TARGET)_qemu
