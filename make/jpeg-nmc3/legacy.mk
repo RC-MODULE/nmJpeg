@@ -57,7 +57,7 @@ endif
 ARCH             =nmc3
 #--------------  target & input dirs -------------------
 PROJECT          = nmjpeg-$(ARCH)
-TMP_DIR          = Release
+TMP_DIR          = ReleaseLegacy
 OUT_DIR          = $(ROOT)/lib
 TARGET           = $(OUT_DIR)/$(PROJECT).lib
 INC_DIRS         = -I$(ROOT)/include -I$(NMPP)/include -I"$(NEURO)/include" -I$(ROOT)/src/common
@@ -83,7 +83,7 @@ CC_FLAGS         =$(CCPP_FLAGS) -Tc99
 LIBS            :=
 AS_FLAGS        +=-ga
 BUILDER_FLAGS   +=-d0
-TMP_DIR          =Debug
+TMP_DIR          =DebugLegacy
 endif 
 #=================== SOURCE & OBJECTS COLLECTION ===========================
 .SUFFIXES:

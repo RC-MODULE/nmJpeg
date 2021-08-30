@@ -25,16 +25,18 @@ SRC_ASM  = $(wildcard $(addsuffix /*.asm,..))
 
 
 
-$(TARGET): $(SRC_CPP) $(SRC_ASM) $(CFG) $(ROOT)/lib/nmjpeg-nmc3.lib
+
+$(TARGET): $(SRC_CPP) $(SRC_ASM) $(CFG) 
 	nmcc -Tc99 -o$(TARGET) -m.main.map $(SRC_CPP) $(SRC_ASM) -nmc3 -g -O0 $(INC_DIRS) $(LIB_DIRS) $(LIBS) -c$(CFG) -heap=17000 -heap1=30000 -heap2=30000 -heap3=30000 $(ERRECHO) -Tc99
 
+#$(ROOT)/lib/nmjpeg-nmc3.lib
 #nmcpp ../main.cpp -Tc99 -nmc3  $(INC_DIRS) -Omain.asm
 
 PATH:=$(MC5103)/bin;$(PATH)
 
 
 $(ROOT)/lib/nmjpeg-nmc3.lib: FORCE
-	cd $(ROOT)/make/jpeg-nmc3 && $(MAKE) -f legacy.mk
+	cd $(ROOT)/make/jpeg-nmc3 && $(MAKE) clean && $(MAKE) -f legacy.mk
 	
 FORCE:
 	

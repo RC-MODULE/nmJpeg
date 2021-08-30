@@ -138,18 +138,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\common\JPG_AUX_GenTbl.cpp" />
-    <ClCompile Include="..\..\src\common\JPG_Compress.cpp" />
-    <ClCompile Include="..\..\src\pc\DCT_tbl.cpp" />
-    <ClCompile Include="..\..\src\pc\InsertJPEGHeader__char.cpp" />
-    <ClCompile Include="..\..\src\pc\JPG_AUX_CheckMarkerByte__int_int.cpp" />
-    <ClCompile Include="..\..\src\pc\JPG_AUX_InsertDIFF__long_int.cpp" />
-    <ClCompile Include="..\..\src\pc\JPG_AUX_RLE__int_int.cpp" />
-    <ClCompile Include="..\..\src\pc\JPG_FwdDct8x8__nm08s_nm32s.cpp" />
-    <ClCompile Include="..\..\src\pc\JPG_InvDct8x8__nm16s_nm32s.cpp" />
-    <ClCompile Include="..\..\src\pc\JPG_InvZigZag8x8__nm32s_nm32s.cpp" />
-    <ClCompile Include="..\..\src\pc\JPG_Quant_By2Int__nm32s_nm32s.cpp" />
-    <ClCompile Include="..\..\src\pc\VLC_Compress__int_nm64u.cpp" />
+    <ClCompile Include="..\..\src\common\Compress.cpp" />
+    <ClCompile Include="..\..\src\common\jpg_GenTbl.cpp" />
+    <ClCompile Include="..\..\src\pc\FwdDct8x8_08s32s.cpp" />
+    <ClCompile Include="..\..\src\pc\FwdDctTbl.cpp" />
+    <ClCompile Include="..\..\src\pc\FwdDctTbl_lf.cpp" />
+    <ClCompile Include="..\..\src\pc\InsertJPEGHeader.cpp" />
+    <ClCompile Include="..\..\src\pc\InvDct8x8_16s32s.cpp" />
+    <ClCompile Include="..\..\src\pc\InvDctTbl.cpp" />
+    <ClCompile Include="..\..\src\pc\InvZigZag8x8_32s.cpp" />
+    <ClCompile Include="..\..\src\pc\jpg_CheckMarkerByte.cpp" />
+    <ClCompile Include="..\..\src\pc\jpg_InsertDIFF.cpp" />
+    <ClCompile Include="..\..\src\pc\jpg_Quant_By2Int_32s.cpp" />
+    <ClCompile Include="..\..\src\pc\jpg_RLE.cpp" />
+    <ClCompile Include="..\..\src\pc\vlc_Compress.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,5 @@
 
-
+#ifdef __NM__
 #ifdef __GNUC__ //  NMC-GCC C++ compilier 
 	#define IN_DATA_SECTION(sec) __attribute__((section(sec)))
 	#define IN_CODE_SECTION(sec) __attribute__((section(sec)))
@@ -8,3 +8,7 @@
 	#define IN_DATA_SECTION(sec) DO_PRAGMA(data_section sec)
 	#define IN_CODE_SECTION(sec) DO_PRAGMA(code_section sec)
 #endif 
+#else
+	#define IN_DATA_SECTION(sec) 
+	#define IN_CODE_SECTION(sec) 
+#endif
